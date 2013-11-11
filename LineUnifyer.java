@@ -37,8 +37,8 @@ public class LineUnifyer{
 					if(thisLine.matches(".*[\\p{Punct}&&[^\\s]]$"))
 						thisLine += nextLine;
 					else
-						thisLine += " " + nextLine;
-					if(nextLine.matches(".*\"$")){
+						thisLine += " " + nextLine; //adds a space to delimit the lines
+					if(nextLine.matches(".*\"$")){ //we've found our end character! stop!
 						quotedLineEnd = true;
 					}
 					
