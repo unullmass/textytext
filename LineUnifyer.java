@@ -2,11 +2,11 @@ import java.io.*;
 import java.util.*;
 
 /*
-	Reads from a file provided as input. 
-	Merges lines that have been split
-	by double-quotes. Should add options to allows to merge by any delimiter.
+	Reads from a file provided as input.
+	Merges lines that have been split across multiple lines with double-quotes.
+	Should add options to allows to merge by any delimiter.
 	
-	By http://ranthoranfell.blogspot.com/
+	http://ranthoranfell.blogspot.com/
 
 */
 public class LineUnifyer{
@@ -28,9 +28,12 @@ public class LineUnifyer{
 		while(s.hasNextLine()){
 			String thisLine = s.nextLine();
 			boolean quotedLineEnd = false;
+			//if the line contains both end quotes skip any more processing
 			if(thisLine.matches("^\".*$") && !thisLine.matches("^\".*\"?\"$")){
+				//if the line contains no end-quote we need to loop till we find one
 				while(!quotedLineEnd && s.hasNextLine()){
 					String nextLine = s.nextLine();
+					//if the line ends with special characters that continue into the next line
 					if(thisLine.matches(".*[\\p{Punct}&&[^\\s]]$"))
 						thisLine += nextLine;
 					else
